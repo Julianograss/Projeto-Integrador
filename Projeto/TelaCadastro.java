@@ -1,17 +1,17 @@
-package Projeto;
+package view;
 
 import javax.swing.*;
-import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class TelaCadastro extends JFrame{
-    public Graphics g;
-    public TelaCadastro(){
+public class TelaCadastro extends JFrame {
+
+    public TelaCadastro() {
         setSize(1400, 800);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+        setTitle("Tela de Cadastro e Login");
 
         Font fontLabels = new Font("Arial", Font.BOLD, 14);
         Font fontTxtFields = new Font("Monospaced", Font.PLAIN, 13);
@@ -23,219 +23,169 @@ public class TelaCadastro extends JFrame{
 
         JPanel pnlCentralizar = new JPanel(new BorderLayout());
         pnlCentralizar.setBorder(BorderFactory.createEmptyBorder(0, 150, 100, 150));
+        
         JPanel pnlBase = new JPanel();
         pnlBase.setLayout(new BoxLayout(pnlBase, BoxLayout.X_AXIS));
         pnlBase.setBackground(Color.LIGHT_GRAY);
-        pnlBase.setPreferredSize(new Dimension(1000,550));
 
-        //Inicio dos componentes de cadastro
-        JPanel pnlCompnentsCadas = new JPanel();
-        pnlCompnentsCadas.setPreferredSize(new Dimension(500,550));
+        JPanel pnlCompnentsCadas = new JPanel(new GridBagLayout());
         pnlCompnentsCadas.setBackground(Color.LIGHT_GRAY);
-        pnlCompnentsCadas.setLayout(null);
+        pnlCompnentsCadas.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
 
-        JLabel lblMsgCadas = new JLabel("Cadastre-se Aqui");
+        GridBagConstraints gbcCadas = new GridBagConstraints();
+        gbcCadas.fill = GridBagConstraints.HORIZONTAL;
+        gbcCadas.insets = new Insets(5, 0, 5, 0); 
+        gbcCadas.weightx = 1.0;
+
+        JLabel lblMsgCadas = new JLabel("Cadastre-se Aqui", SwingConstants.CENTER);
         lblMsgCadas.setFont(new Font("Arial", Font.BOLD, 20));
-        lblMsgCadas.setBounds(150,20,200,40);
+        gbcCadas.gridx = 0; gbcCadas.gridy = 0;
+        gbcCadas.insets = new Insets(0, 0, 20, 0); 
+        pnlCompnentsCadas.add(lblMsgCadas, gbcCadas);
+
+        gbcCadas.insets = new Insets(5, 0, 0, 0);
 
         JLabel lblNomeComp = new JLabel("Nome Completo");
         lblNomeComp.setFont(fontLabels);
-        lblNomeComp.setBounds(50, 100, 120, 20);
+        gbcCadas.gridy = 1; pnlCompnentsCadas.add(lblNomeComp, gbcCadas);
+
         JTextField txtNomeComp = new JTextField();
         txtNomeComp.setFont(fontTxtFields);
-        txtNomeComp.setBounds(50, 130, 220, 25);
+        gbcCadas.gridy = 2; pnlCompnentsCadas.add(txtNomeComp, gbcCadas);
 
         JLabel lblCllrEmail = new JLabel("Celular ou Email");
         lblCllrEmail.setFont(fontLabels);
-        lblCllrEmail.setBounds(50, 170, 150, 20);
+        gbcCadas.gridy = 3; pnlCompnentsCadas.add(lblCllrEmail, gbcCadas);
+
         JTextField txtCllrEmail = new JTextField();
         txtCllrEmail.setFont(fontTxtFields);
-        txtCllrEmail.setBounds(50, 200, 220, 25);
+        gbcCadas.gridy = 4; pnlCompnentsCadas.add(txtCllrEmail, gbcCadas);
 
         JLabel lblSenhaCadas = new JLabel("Senha");
         lblSenhaCadas.setFont(fontLabels);
-        lblSenhaCadas.setBounds(50, 240, 120, 20);
+        gbcCadas.gridy = 5; pnlCompnentsCadas.add(lblSenhaCadas, gbcCadas);
+
         JTextField txtSenhaCadas = new JTextField();
         txtSenhaCadas.setFont(fontTxtFields);
-        txtSenhaCadas.setBounds(50, 270, 220, 25);
+        gbcCadas.gridy = 6; pnlCompnentsCadas.add(txtSenhaCadas, gbcCadas);
 
         JLabel lblDataNasc = new JLabel("Data de Nascimento");
         lblDataNasc.setFont(fontLabels);
-        lblDataNasc.setBounds(50, 310, 150, 20);
-        String msgDia = "Dia";
-        JTextField txtDia = new JTextField();
-        txtDia.setText(msgDia);
-        txtDia.setFont(new Font("Arial", Font.BOLD, 12));
-        txtDia.setBounds(50, 340, 40, 25);
-        txtDia.setForeground(Color.GRAY);
-        txtDia.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e){
-                if (txtDia.getText().equals(msgDia)) {
-                    txtDia.setText("");
-                    txtDia.setForeground(Color.BLACK);
-                }
-            }
-            @Override
-            public void focusLost(FocusEvent e){
-                if (txtDia.getText().isEmpty()) {
-                    txtDia.setText(msgDia);
-                    txtDia.setForeground(Color.GRAY);
-                }
-            }
-        });
-        String msgMes = "Mês";
-        JTextField txtMes = new JTextField("Mês");
-        txtMes.setFont(new Font("Arial", Font.BOLD, 12));
-        txtMes.setBounds(140, 340, 40, 25);
-        txtMes.setForeground(Color.GRAY);
-        txtMes.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e){
-                if (txtMes.getText().equals(msgMes)) {
-                    txtMes.setText("");
-                    txtMes.setForeground(Color.BLACK);
-                }
-            }
-            @Override
-            public void focusLost(FocusEvent e){
-                if (txtMes.getText().isEmpty()) {
-                    txtMes.setText(msgMes);
-                    txtMes.setForeground(Color.GRAY);
-                }
-            }
-        });
-        String msgAno = "Ano";
-        JTextField txtAno = new JTextField("Ano");
-        txtAno.setFont(new Font("Arial", Font.BOLD, 12));
-        txtAno.setBounds(230, 340, 40, 25);
-        txtAno.setForeground(Color.GRAY);
-        txtAno.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e){
-                if (txtAno.getText().equals(msgAno)) {
-                    txtAno.setText("");
-                    txtAno.setForeground(Color.BLACK);
-                }
-            }
-            @Override
-            public void focusLost(FocusEvent e){
-                if (txtAno.getText().isEmpty()) {
-                    txtAno.setText(msgAno);
-                    txtAno.setForeground(Color.GRAY);
-                }
-            }
-        });
+        gbcCadas.gridy = 7; pnlCompnentsCadas.add(lblDataNasc, gbcCadas);
+
+        JPanel pnlData = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        pnlData.setBackground(Color.LIGHT_GRAY);
+        
+        JTextField txtDia = criarCampoPlaceholder("Dia");
+        JTextField txtMes = criarCampoPlaceholder("Mês");
+        JTextField txtAno = criarCampoPlaceholder("Ano");
+        
+        pnlData.add(txtDia);
+        pnlData.add(txtMes);
+        pnlData.add(txtAno);
+        gbcCadas.gridy = 8; pnlCompnentsCadas.add(pnlData, gbcCadas);
 
         JLabel lblGenero = new JLabel("Gênero");
         lblGenero.setFont(fontLabels);
-        lblGenero.setBounds(50, 380, 120, 25);
-        JLabel lblFeminino = new JLabel("F");
-        lblFeminino.setFont(fontLabels);
-        lblFeminino.setBounds(50, 410, 20, 25);
-        JCheckBox chkFeminino = new JCheckBox();
-        chkFeminino.setBounds(60, 410, 20, 25);
-        chkFeminino.setBackground(null);
-        JLabel lblMasculino = new JLabel("M");
-        lblMasculino.setFont(fontLabels);
-        lblMasculino.setBounds(140, 410, 20, 25);
-        JCheckBox chkMasculino = new JCheckBox();
-        chkMasculino.setBounds(155, 410, 20, 25);
-        chkMasculino.setBackground(null);
-        JLabel lblOutro = new JLabel("Outro");
-        lblOutro.setFont(fontLabels);
-        lblOutro.setBounds(210, 410, 60, 25);
-        JCheckBox chkOutro = new JCheckBox();
-        chkOutro.setBounds(250, 410, 20, 25);
-        chkOutro.setBackground(null);
+        gbcCadas.gridy = 9; pnlCompnentsCadas.add(lblGenero, gbcCadas);
+
+        JPanel pnlGenero = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        pnlGenero.setBackground(Color.LIGHT_GRAY);
+        
+        JCheckBox chkFeminino = new JCheckBox("F");
+        chkFeminino.setBackground(Color.LIGHT_GRAY);
+        chkFeminino.setFont(fontLabels);
+        
+        JCheckBox chkMasculino = new JCheckBox("M");
+        chkMasculino.setBackground(Color.LIGHT_GRAY);
+        chkMasculino.setFont(fontLabels);
+        
+        JCheckBox chkOutro = new JCheckBox("Outro");
+        chkOutro.setBackground(Color.LIGHT_GRAY);
+        chkOutro.setFont(fontLabels);
+
+        pnlGenero.add(chkFeminino);
+        pnlGenero.add(chkMasculino);
+        pnlGenero.add(chkOutro);
+        gbcCadas.gridy = 10; pnlCompnentsCadas.add(pnlGenero, gbcCadas);
 
         JButton btnCadastrar = new JButton("Cadastrar");
         btnCadastrar.setFont(new Font("Arial", Font.BOLD, 18));
-        btnCadastrar.setBounds(150, 475, 250, 25);
-        
-        pnlCompnentsCadas.add(lblMsgCadas);
-        pnlCompnentsCadas.add(lblNomeComp);
-        pnlCompnentsCadas.add(txtNomeComp);
-        pnlCompnentsCadas.add(lblCllrEmail);
-        pnlCompnentsCadas.add(txtCllrEmail);
-        pnlCompnentsCadas.add(lblSenhaCadas);
-        pnlCompnentsCadas.add(txtSenhaCadas);
-        pnlCompnentsCadas.add(lblDataNasc);
-        pnlCompnentsCadas.add(txtDia);
-        pnlCompnentsCadas.add(txtMes);
-        pnlCompnentsCadas.add(txtAno);
-        pnlCompnentsCadas.add(lblGenero);
-        pnlCompnentsCadas.add(lblFeminino);
-        pnlCompnentsCadas.add(lblMasculino);
-        pnlCompnentsCadas.add(lblOutro);
-        pnlCompnentsCadas.add(chkFeminino);
-        pnlCompnentsCadas.add(chkMasculino);
-        pnlCompnentsCadas.add(chkOutro);
-        pnlCompnentsCadas.add(btnCadastrar);
-        //Fim dos componentes de cadastro
+        gbcCadas.gridy = 11; 
+        gbcCadas.insets = new Insets(20, 0, 0, 0); 
+        gbcCadas.fill = GridBagConstraints.NONE; 
+        pnlCompnentsCadas.add(btnCadastrar, gbcCadas);
 
         JSeparator separador = new JSeparator(JSeparator.VERTICAL);
-        separador.setMaximumSize(new Dimension(2, 400));
-        separador.setForeground(Color.BLACK);
-        separador.setAlignmentY(CENTER_ALIGNMENT);
+        separador.setMaximumSize(new Dimension(2, 450));
+        separador.setForeground(Color.DARK_GRAY);
 
-        //Inicio dos componentes de Login
-        JPanel pnlCompnentsLog = new JPanel();
-        pnlCompnentsLog.setPreferredSize(new Dimension(500,550));
+        JPanel pnlCompnentsLog = new JPanel(new GridBagLayout());
         pnlCompnentsLog.setBackground(Color.LIGHT_GRAY);
-        pnlCompnentsLog.setLayout(null);
+        pnlCompnentsLog.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
 
-        JLabel lblMsgLog = new JLabel("Já Possui uma Conta?");
+        GridBagConstraints gbcLog = new GridBagConstraints();
+        gbcLog.fill = GridBagConstraints.HORIZONTAL;
+        gbcLog.insets = new Insets(5, 0, 5, 0);
+        gbcLog.weightx = 1.0;
+
+        JLabel lblMsgLog = new JLabel("Já Possui uma Conta?", SwingConstants.CENTER);
         lblMsgLog.setFont(new Font("Arial", Font.BOLD, 20));
-        lblMsgLog.setBounds(150,20,300,40);
+        gbcLog.gridx = 0; gbcLog.gridy = 0;
+        gbcLog.insets = new Insets(0, 0, 20, 0);
+        pnlCompnentsLog.add(lblMsgLog, gbcLog);
+
+        gbcLog.insets = new Insets(5, 0, 0, 0);
 
         JLabel lblNomEmail = new JLabel("Nome ou Email");
         lblNomEmail.setFont(fontLabels);
-        lblNomEmail.setBounds(50, 100, 120, 25);
+        gbcLog.gridy = 1; pnlCompnentsLog.add(lblNomEmail, gbcLog);
+
         JTextField txtNomEmail = new JTextField();
         txtNomEmail.setFont(fontTxtFields);
-        txtNomEmail.setBounds(50, 130, 220, 25);
+        gbcLog.gridy = 2; pnlCompnentsLog.add(txtNomEmail, gbcLog);
 
         JLabel lblSenhaLog = new JLabel("Senha");
         lblSenhaLog.setFont(fontLabels);
-        lblSenhaLog.setBounds(50, 170, 120, 25);
+        gbcLog.gridy = 3; pnlCompnentsLog.add(lblSenhaLog, gbcLog);
+
         JTextField txtSenhaLog = new JTextField();
         txtSenhaLog.setFont(fontTxtFields);
-        txtSenhaLog.setBounds(50, 200, 220, 25);
+        gbcLog.gridy = 4; pnlCompnentsLog.add(txtSenhaLog, gbcLog);
 
         JButton btnEntrar = new JButton("Entrar");
         btnEntrar.setFont(new Font("Arial", Font.BOLD, 16));
-        btnEntrar.setBounds(180, 275, 150, 25);
-        btnEntrar.addActionListener(e ->{
-            new TelaLogin();
+        gbcLog.gridy = 5; 
+        gbcLog.insets = new Insets(20, 0, 20, 0);
+        gbcLog.fill = GridBagConstraints.NONE;
+        btnEntrar.addActionListener(e -> {
+            new TelaLogin(); 
+            JOptionPane.showMessageDialog(this, "Redirecionando para Login...");
         });
+        pnlCompnentsLog.add(btnEntrar, gbcLog);
 
-        JLabel lblMsgOu = new JLabel("Ou");
+        gbcLog.fill = GridBagConstraints.HORIZONTAL;
+        gbcLog.insets = new Insets(5, 0, 5, 0);
+
+        JLabel lblMsgOu = new JLabel("Ou", SwingConstants.CENTER);
         lblMsgOu.setFont(fontLabels);
-        lblMsgOu.setBounds(245, 337, 50, 25);
+        gbcLog.gridy = 6; pnlCompnentsLog.add(lblMsgOu, gbcLog);
+
         JButton btnGoogle = new JButton("Fazer Login com Google");
         btnGoogle.setFont(new Font("Arial", Font.BOLD, 16));
-        btnGoogle.setBounds(130, 400, 250, 25);
+        gbcLog.gridy = 7; pnlCompnentsLog.add(btnGoogle, gbcLog);
+
         JButton btnInstagram = new JButton("Fazer Login com Instagram");
         btnInstagram.setFont(new Font("Arial", Font.BOLD, 16));
-        btnInstagram.setBounds(130, 475, 250, 25);
+        gbcLog.gridy = 8; pnlCompnentsLog.add(btnInstagram, gbcLog);
 
-        pnlCompnentsLog.add(lblMsgLog);
-        pnlCompnentsLog.add(lblNomEmail);
-        pnlCompnentsLog.add(txtNomEmail);
-        pnlCompnentsLog.add(lblSenhaLog);
-        pnlCompnentsLog.add(txtSenhaLog);
-        pnlCompnentsLog.add(btnEntrar);
-        pnlCompnentsLog.add(lblMsgOu);
-        pnlCompnentsLog.add(btnGoogle);
-        pnlCompnentsLog.add(btnInstagram);
-        //Fim dos componentes de Login
-
-
+        pnlBase.add(Box.createHorizontalStrut(20)); 
         pnlBase.add(pnlCompnentsCadas);
-        pnlBase.add(Box.createVerticalStrut(50));
+        pnlBase.add(Box.createHorizontalStrut(20)); 
         pnlBase.add(separador);
+        pnlBase.add(Box.createHorizontalStrut(20)); 
         pnlBase.add(pnlCompnentsLog);
+        pnlBase.add(Box.createHorizontalStrut(20)); 
 
         pnlCentralizar.add(pnlBase, BorderLayout.CENTER);
         add(pnlCentralizar, BorderLayout.CENTER);
@@ -243,7 +193,33 @@ public class TelaCadastro extends JFrame{
 
         setVisible(true);
     }
-    public static void main(String agrs[]){
-        new TelaCadastro();
+
+    private JTextField criarCampoPlaceholder(String placeholder) {
+        JTextField txtField = new JTextField(placeholder);
+        txtField.setPreferredSize(new Dimension(50, 25));
+        txtField.setFont(new Font("Arial", Font.BOLD, 12));
+        txtField.setForeground(Color.GRAY);
+        
+        txtField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtField.getText().equals(placeholder)) {
+                    txtField.setText("");
+                    txtField.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtField.getText().isEmpty()) {
+                    txtField.setText(placeholder);
+                    txtField.setForeground(Color.GRAY);
+                }
+            }
+        });
+        return txtField;
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(TelaCadastro::new);
     }
 }
